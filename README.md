@@ -13,6 +13,8 @@ genomic regions or individual cytosines
 in next-generation sequencing data using binary alignment map (BAM) files as
 an input. See below for additional functionality.
 
+![](./vignettes/epialleles.png)
+
 ### Current Features
 
  * calling cytosine methylation and saving calls in BAM file

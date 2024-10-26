@@ -472,7 +472,7 @@ regions but does not require thresholding &#8212;
 linearised Methylated Haplotype Load (lMHL).
 
 lMHL is a modified version of MHL (MHL was first described by
-[Guo et al., 2017](https://doi.org/10.1038/ng.3805}{10.1038/ng.3805)), sought to
+Guo et al., 2017,[^7] sought to
 be faster and applicable for a wider range of sequencing data. More information
 on this is given in the help page for the *`generateMhlReport`* as well as in
 the `values` vignette.
@@ -521,7 +521,7 @@ plotPatterns(capture.patterns, npatterns.per.bin=Inf,
 ## Exploring sequence variants in epialleles
 
 It is known that sequence variants can affect the methylation status of a
-DNA.[^7] The *`generateVcfReport`* function calculates frequencies of single
+DNA.[^8] The *`generateVcfReport`* function calculates frequencies of single
 nucleotide variants (SNVs) within epialleles and tests for the association
 between SNV and epiallelic status using Fisher Exact test. Base counts and the
 test's p-values are included in the returned value.
@@ -694,7 +694,8 @@ sessionInfo()
 [^2]: https://doi.org/10.1101/2020.12.01.403501
 [^3]: https://doi.org/10.1093/bib/bbx077
 [^4]: https://www.zymoresearch.com/products/human-methylated-non-methylated-dna-set-dna-w-primers
-[^5]: https://dx.doi.org/10.1186%2Fs13148-020-00920-7
+[^5]: https://doi.org/10.1186/s13148-020-00920-7
 [^6]: https://www.bioinformatics.babraham.ac.uk/projects/bismark/
-[^7]: https://doi.org/10.1038/modpathol.2009.130
+[^7]: https://doi.org/10.1038/ng.3805
+[^8]: https://doi.org/10.1038/modpathol.2009.130
 

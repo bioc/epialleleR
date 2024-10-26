@@ -1,13 +1,12 @@
 Package: epialleleR
 Title: Fast, Epiallele-Aware Methylation Caller and Reporter
-Version: 1.13.4
+Version: 1.13.5
 Authors@R: 
   person(given = "Oleksii",
     family = "Nikolaienko",
     role = c("aut", "cre"),
     email = "oleksii.nikolaienko@gmail.com",
     comment = c(ORCID = "0000-0002-5910-4934"))
-CommentMaintainer: Oleksii Nikolaienko <oleksii.nikolaienko@gmail.com>
 Description: Epialleles are specific DNA methylation patterns that are
   mitotically and/or meiotically inherited. This package calls and reports
   cytosine methylation as well as frequencies of hypermethylated

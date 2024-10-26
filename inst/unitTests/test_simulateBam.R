@@ -108,7 +108,9 @@ test_simulateBam <- function () {
     ),
     XG=c("CT")
   )
-  cg.beta <- generateCytosineReport(out.bam, threshold.reads=FALSE)
+  ### CHECK MEMORY ISSUES HERE:
+  ### cg.beta <- generateCytosineReport(out.bam, threshold.reads=FALSE)
+  ### END CHECK
   
   out.call <- tempfile(pattern="simulated", fileext=".bam")
   simulateBam(

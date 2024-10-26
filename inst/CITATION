@@ -1,7 +1,7 @@
 citHeader("To cite epialleleR in publications use:")
 
-citEntry(
-  entry    = "Article",
+bibentry(
+  bibtype  = "Article",
   title    = "epialleleR: an R/Bioconductor package for sensitive allele-specific methylation analysis in NGS data",
   author   = c(person("Oleksii", "Nikolaienko"), person("Per Eystein", "Lønning"), person("Stian", "Knappskog")),
   journal  = "GigaScience",

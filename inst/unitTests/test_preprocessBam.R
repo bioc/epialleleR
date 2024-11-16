@@ -131,6 +131,9 @@ test_preprocessBam <- function () {
     preprocessBam(system.file("extdata", "test", "dragen-pe-namesort-xg-xm.bam", package="epialleleR"), paired=FALSE, verbose=TRUE)
   )
   
+  # paired-ended instead of single-ended, but override
+  preprocessBam(system.file("extdata", "test", "dragen-pe-namesort-xg-xm.bam", package="epialleleR"), paired=FALSE, override.check=TRUE, verbose=TRUE)
+  
   # single-ended instead of paired-ended
   RUnit::checkException(
     preprocessBam(system.file("extdata", "test", "dragen-se-unsort-xg-xm.bam", package="epialleleR"), paired=TRUE, verbose=TRUE)

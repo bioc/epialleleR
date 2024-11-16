@@ -95,3 +95,7 @@ Changes in version 1.13.3 (2024-10-04)
 
 Changes in version 1.13.4 (2024-10-10)
 + VariantAnnotation moved to Suggests
+
+Changes in version 1.15.1 (2024-11-16)
++ can override alignment endness when loading BAM
+

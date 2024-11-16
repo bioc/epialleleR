@@ -43,10 +43,12 @@
 #' @section Other details:
 #' 
 #' `preprocessBam` always tests if BAM file is paired- or single-ended
-#' and has all necessary tags available. It is recommended to use
+#' and has all the necessary tags available. It is recommended to use
 #' `verbose` processing and check messages for correct identification of
 #' alignment endness. Otherwise, if the `paired` parameter is set explicitly,
-#' exception is thrown when expected endness differs from the auto detected one.
+#' exception is thrown when expected endness differs from the autodetected one.
+#' It is nevertheless possible to override the autodetected endness and load
+#' BAM as specified in `paired` by setting the `override.check` to TRUE.
 #' 
 #' During preprocessing of paired-end alignments, paired reads are merged
 #' according to
@@ -106,6 +108,8 @@
 #' @param bam.file BAM file location string.
 #' @param paired boolean for expected alignment endness: `TRUE` for paired-end,
 #' `FALSE` for single-end, or `NULL` for auto detect (the default).
+#' @param override.check boolean to use supplied endness (`paired` parameter)
+#' even if it is different from the autodetected one (default: FALSE).
 #' @param min.mapq non-negative integer threshold for minimum read mapping
 #' quality (default: 0).
 #' @param min.baseq non-negative integer threshold for minimum nucleotide base
@@ -196,6 +200,7 @@
 #' @export
 preprocessBam <- function (bam.file,
                            paired=NULL,
+                           override.check=FALSE,
                            min.mapq=0,
                            min.baseq=0,
                            min.prob=-1,
@@ -210,10 +215,17 @@ preprocessBam <- function (bam.file,
 {
   if (is.character(bam.file)) {
     bam.check <- .checkBam(bam.file=bam.file, verbose=verbose)
-    if (!is.null(paired))
-      if (bam.check$paired!=paired)
-        stop("Expected endness is different from detected! Exiting",call.=FALSE)
-    trim <- utils::head(rep.int(trim, times=2), 2)
+    if (!is.null(paired) && bam.check$paired!=paired) {
+      if (override.check) {
+        warning("Supplied endness is different from detected!", call.=FALSE)
+        bam.check$paired <- paired
+      } else {
+        stop("Supplied endness is different from detected! If it is a mistake,",
+             " override with 'override.check=TRUE'", call.=FALSE)
+      }
+    }
+      
+    trim <- rep_len(trim, length.out=2)
     bam.processed <- .readBam(
       bam.file=bam.file, bam.check=bam.check,
       min.mapq=min.mapq, min.baseq=min.baseq,
@@ -224,8 +236,9 @@ preprocessBam <- function (bam.file,
     )
     return(bam.processed)
   } else {
-    if (verbose &
-        !all(missing(paired), missing(min.mapq), missing(min.baseq),
+    if (verbose &&
+        !all(missing(paired), missing(override.check),
+             missing(min.mapq), missing(min.baseq),
              missing(min.prob), missing(highest.prob),
              missing(skip.duplicates), missing(skip.secondary),
              missing(skip.qcfail), missing(skip.supplementary),

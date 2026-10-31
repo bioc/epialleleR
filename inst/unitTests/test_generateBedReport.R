@@ -1,10 +1,10 @@
 test_generateBedReport <- function () {
   amplicon.bam    <- system.file("extdata", "amplicon010meth.bam", package="epialleleR")
   amplicon.bed    <- system.file("extdata", "amplicon.bed", package="epialleleR")
-  amplicon.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed, verbose=FALSE)
+  amplicon.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed, verbose=FALSE, match.tolerance=20)
   
-  nofilter.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed, filter.reads=FALSE, verbose=TRUE)
-  nothreshold.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed, threshold.reads=FALSE, verbose=TRUE)
+  nofilter.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed, filter.reads=FALSE, verbose=TRUE, match.tolerance=20)
+  nothreshold.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed, threshold.reads=FALSE, verbose=TRUE, match.tolerance=20)
   
   capture.bam    <- system.file("extdata", "capture.bam", package="epialleleR")
   capture.bed    <- system.file("extdata", "capture.bed", package="epialleleR")
@@ -82,7 +82,7 @@ test_generateBedReport <- function () {
   
   
   quality.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed,
-                                           min.mapq=30, min.baseq=20, verbose=TRUE)
+                                           min.mapq=30, min.baseq=20, verbose=TRUE, match.tolerance=20)
   
   RUnit::checkEquals(
     sum(quality.report$`nreads-`),
@@ -102,5 +102,12 @@ test_generateBedReport <- function () {
   allowall.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed, filter.reads=FALSE, threshold.reads=FALSE)
   RUnit::checkTrue(
     all(is.na(c(allowall.report$nfiltered, allowall.report$VEF)))
+  )
+  
+  match1.report <- generateAmpliconReport(bam=amplicon.bam, bed=amplicon.bed,
+                                          min.mapq=30, min.baseq=20, verbose=TRUE)
+  RUnit::checkEquals(
+    match1.report$VEF,
+    c(0.08552631579, 0.11666666667, 0.05434782609, 0.10126582278, 0.13861386139),
   )
 }

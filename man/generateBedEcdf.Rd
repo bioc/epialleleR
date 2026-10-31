@@ -34,8 +34,8 @@ produce sequencing reads:
   \item "amplicon" (the default) -- used for amplicon-based next-generation
   sequencing when exact coordinates of sequenced fragments are known.
   Matching of reads to genomic ranges are then performed by the read's start
-  or end positions, either of which should be no further than
-  `match.tolerance` bases away from the start or end position of genomic
+  AND end positions, both of which should be no further than
+  `match.tolerance` bases away from the start and end position of genomic
   ranges given in BED file/\code{\link[GenomicRanges]{GRanges}} object
   \item "capture" -- used for capture-based next-generation sequencing when
   reads partially overlap with the capture target regions. Read is considered
@@ -55,7 +55,7 @@ genomic regions as well as for the reads that didn't match any of the regions
 (default: FALSE).}
 
 \item{match.tolerance}{integer for the largest difference between read's and
-BED \code{\link[GenomicRanges]{GRanges}} start or end positions during
+BED \code{\link[GenomicRanges]{GRanges}} start and end positions during
 matching of amplicon-based NGS reads (default: 1).}
 
 \item{match.min.overlap}{integer for the smallest overlap between read's and

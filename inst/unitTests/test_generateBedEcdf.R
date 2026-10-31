@@ -7,7 +7,7 @@ test_generateBedEcdf <- function () {
   
   RUnit::checkEquals(
     sapply(unlist(amplicon.ecdfs, use.names=FALSE), function (x) {x(0.5)}),
-    c(0.916666666667, 1, 0.885245901639, 1),
+    c(0.914473684211, 1, 0.883333333333, 1),
     tolerance=1e-08
   )
   
@@ -20,8 +20,8 @@ test_generateBedEcdf <- function () {
   
   RUnit::checkEquals(
     sapply(unlist(amplicon.ecdfs, use.names=FALSE), function (x) {x(0.5)}),
-    c(0.916666666667, 1, 0.885245901639, 1, 0.946236559140, 1,
-      0.892857142857, 1, 0.868131868132, 1),
+    c(0.914473684211, 1, 0.883333333333, 1, 0.945652173913, 1,
+      0.898734177215, 1, 0.872549019608, 1),
     tolerance=1e-08
   )
 }

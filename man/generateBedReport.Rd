@@ -80,7 +80,7 @@ pairs) matching both strands are separately counted and reported.}
 (default: FALSE).}
 
 \item{match.tolerance}{integer for the largest difference between read's and
-BED \code{\link[GenomicRanges]{GRanges}} start or end positions during
+BED \code{\link[GenomicRanges]{GRanges}} start AND end positions during
 matching of amplicon-based NGS reads (default: 1).}
 
 \item{cytosine.context}{string defining cytosine methylation context used
@@ -147,9 +147,9 @@ BED genomic regions, only the first match is taken (input
 produce sequencing reads:
 \itemize{
   \item "amplicon" (the default) -- used for amplicon-based next-generation
-  sequencing when exact coordinates of sequenced fragments are known.
+  sequencing when the exact coordinates of sequenced fragments are known.
   Matching of reads to genomic ranges are then performed by the read's start
-  or end positions, either of which should be no further than
+  AND end positions, both of which should be no further than
   `match.tolerance` bases away from the start or end position of genomic
   ranges given in BED file/\code{\link[GenomicRanges]{GRanges}} object
   \item "capture" -- used for capture-based next-generation sequencing when

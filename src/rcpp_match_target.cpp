@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 // using namespace Rcpp;
 
-// Matches reads to targets by start *or* end plus/minus tolerance (amplicons)
+// Matches reads to targets by start *and* end plus/minus tolerance (amplicons)
 // OR overlap (capture).
 // Return value: 1-based target index or NA for non-matched.
 // Only first match is taken.
@@ -34,7 +34,7 @@ std::vector<int> rcpp_match_amplicon(Rcpp::DataFrame &df,                       
     int read_end = read_start[x] + seqxm->at(templid[x]).size() - 1;
     for (unsigned int i=0; i<ampl_start.size(); i++) {
       if ((read_chr[x] == ampl_chr[i]) &&
-          ((std::abs(read_start[x] - ampl_start[i]) <= tolerance) ||
+          ((std::abs(read_start[x] - ampl_start[i]) <= tolerance) &&            // was || until 1.21.3
            (std::abs(read_end - ampl_end[i]) <= tolerance))) {
         res[x] = i+1;
         break;
